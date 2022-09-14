@@ -123,32 +123,18 @@ static dispatch_once_t onceToken;
 
 + (id)sharedManager
 {
-    @synchronized([LocationMath class]) {
-        dispatch_once(&onceToken, ^{
-            [NSException raise:@"Invalid PRARManager" format:@"PRARManager was never instanciated with a delegate"];
-        });
-    }
-    
     return _sharedManager;
 }
+
 + (id)sharedManagerWithSize:(CGSize)size andDelegate:(id)theDelegate
 {
-    @synchronized([LocationMath class]) {
-        dispatch_once(&onceToken, ^{
-            _sharedManager = [[self alloc] initWithScreenSize:size withRadar:NO andDelegate:theDelegate];
-        });
-    }
-    
+    _sharedManager = [[self alloc] initWithScreenSize:size withRadar:NO andDelegate:theDelegate];
     return _sharedManager;
 }
+
 + (id)sharedManagerWithRadarAndSize:(CGSize)size andDelegate:(id)theDelegate
 {
-    @synchronized([LocationMath class]) {
-        dispatch_once(&onceToken, ^{
-            _sharedManager = [[self alloc] initWithScreenSize:size withRadar:YES andDelegate:theDelegate];
-        });
-    }
-    
+    _sharedManager = [[self alloc] initWithScreenSize:size withRadar:YES andDelegate:theDelegate];
     return _sharedManager;
 }
 
